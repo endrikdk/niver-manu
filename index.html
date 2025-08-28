@@ -16,6 +16,7 @@ body {
     color:#333;
     overflow-x:hidden;
     position:relative;
+    min-height:100vh;
 }
 @keyframes zoomOut { 0%{background-size:110%;} 100%{background-size:100%;} }
 body::after {
@@ -25,12 +26,13 @@ body::after {
     background:rgba(177,156,217,0.3);
     z-index:-1;
 }
+
 /* === Títulos === */
 h1 { font-family:'Playfair Display',serif; font-size:2.5rem; text-align:center; color:#fff; margin-top:30px; text-shadow:0 2px 4px rgba(177,156,217,0.9);}
-h2.subtitle { text-align:center; font-weight:300; color:#eee; margin:10px auto 20px; font-size:1.2rem; width:90%;}
+h2.subtitle { text-align:center; font-weight:300; color:#ffffff; margin:10px auto 20px; font-size:1.2rem; width:90%;}
 
 /* === Vinhas === */
-.vine-left,.vine-right { position:fixed; top:0; width:100px; height:100%; background-repeat:no-repeat; background-size:contain; opacity:0.4; z-index:0; }
+.vine-left,.vine-right { position:fixed; top:0; width:80px; height:100%; background-repeat:no-repeat; background-size:contain; opacity:0.4; z-index:0; }
 .vine-left { left:0; background-image:url('images/vinhafoto.jpg'); }
 .vine-right { right:0; background-image:url('images/vinhafoto.jpg'); }
 
@@ -39,42 +41,56 @@ h2.subtitle { text-align:center; font-weight:300; color:#eee; margin:10px auto 2
     width:95%; max-width:1200px; margin:20px auto;
     background:rgba(255,255,255,0.6); border-radius:25px; padding:20px;
     backdrop-filter:blur(15px); box-shadow:0 10px 30px rgba(177,156,217,0.2);
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; z-index:1;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:25px; z-index:1;
 }
 
 /* === Cards === */
 .card {
     position:relative; overflow:hidden; background:rgba(255,255,255,0.85);
-    border-radius:20px; padding:20px; text-align:center; min-height:250px;
+    border-radius:20px; padding:15px; text-align:center; min-height:220px;
     transition:all 0.5s ease; display:flex; align-items:center; justify-content:center; flex-direction:column;
 }
-.card:hover{ transform:translateY(-8px);}
+.card:hover{ transform:translateY(-5px);}
 .card-video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.6; transition:opacity 0.5s ease;}
 .overlay-text { position:absolute; top:10px; left:50%; transform:translateX(-50%); font-size:1rem; font-weight:bold; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,0.6);}
 .card p {
-    position:relative; z-index:1; font-size:1rem; color:#333; line-height:1.4; max-height:160px;
-    overflow-y:auto; padding:10px; background:rgba(255,255,255,0.6); border-radius:10px; width:90%; font-weight:500;
+    position:relative; z-index:1; font-size:1rem; color:#333; line-height:1.4; max-height:140px;
+    overflow-y:auto; padding:10px; background:rgba(255,255,255,0.65); border-radius:10px; width:90%; font-weight:500;
 }
 .card p::-webkit-scrollbar { width:6px; }
 .card p::-webkit-scrollbar-thumb { background:#b19cd9; border-radius:3px; }
 
+/* === Folhas caindo === */
+.leaf {
+    position:fixed;
+    width:30px; height:30px;
+    background-image:url('images/maconhafoto.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+    animation:fall linear infinite;
+    opacity:0.8;
+    z-index:0;
+}
+@keyframes fall { 0%{transform:translateY(-50px) rotate(0deg);opacity:1;} 100%{transform:translateY(110vh) rotate(360deg);opacity:0.5;}}
+
 /* === Player estilo Spotify === */
 .music-player { position:fixed; bottom:10px; left:50%; transform:translateX(-50%);
     background:rgba(255,255,255,0.95); border-radius:50px; box-shadow:0 4px 12px rgba(177,156,217,0.3);
-    padding:10px 15px; display:flex; align-items:center; gap:10px; width:90%; max-width:400px; justify-content:center; font-size:14px;}
-.music-player button { background:#b19cd9; color:#fff; border:none; border-radius:50%; width:40px; height:40px; font-size:16px; cursor:pointer; transition:0.3s; }
+    padding:8px 12px; display:flex; align-items:center; gap:8px; width:90%; max-width:400px; justify-content:center; font-size:12px;}
+.music-player button { background:#b19cd9; color:#fff; border:none; border-radius:50%; width:36px; height:36px; font-size:16px; cursor:pointer; transition:0.3s; }
 .music-player button:hover{ background:#9b84c8; }
 #track-name { color:#333; font-size:12px; flex:1; text-align:center;}
-.progress-bar { width:80px; height:6px; background:#ccc; border-radius:3px; overflow:hidden;}
+.progress-bar { width:70px; height:6px; background:#ccc; border-radius:3px; overflow:hidden;}
 .progress-fill { height:100%; width:0%; background:#b19cd9; transition:width 0.2s linear;}
 
-/* === Responsividade para celular === */
+/* === Responsividade === */
 @media(max-width:768px){
-    h1{font-size:2rem;margin-top:20px;}
-    .main-wrapper{padding:15px; gap:20px;}
-    .card{min-height:220px;}
-    .card p{font-size:0.95rem; max-height:120px;}
-    .music-player{padding:8px 10px; width:95%; gap:8px;}
+    h1{font-size:1.8rem;margin-top:15px;}
+    h2.subtitle{font-size:0.95rem;}
+    .main-wrapper{padding:10px; gap:15px;}
+    .card{min-height:180px;}
+    .card p{font-size:0.85rem; max-height:100px;}
+    .music-player{padding:6px 8px; width:95%; gap:6px;}
     .progress-bar{width:60px;}
 }
 </style>
@@ -85,10 +101,10 @@ h2.subtitle { text-align:center; font-weight:300; color:#eee; margin:10px auto 2
 <div class="vine-right"></div>
 
 <h1>FELIZ ANIVERSÁRIO MANUUUUUUUU</h1>
-<h2 class="subtitle">aprecie essa página aesthetic 🌿</h2>
+<h2 class="subtitle">aprecie essa página capengada feita por um amador dedicadokkkkkkkk S2</h2>
 
-<div style="text-align:center; margin:20px;">
-    <label for="opacityControl" style="color:white; font-weight:bold;">diminui ou aumenta a opacidade dos vídeos:</label>
+<div style="text-align:center; margin:15px;">
+    <label for="opacityControl" style="color:white; font-weight:bold;">Diminui ou aumenta a opacidade dos vídeos para ver os textin:</label>
     <input type="range" min="0" max="1" step="0.05" value="0.6" id="opacityControl">
 </div>
 
@@ -120,77 +136,53 @@ h2.subtitle { text-align:center; font-weight:300; color:#eee; margin:10px auto 2
 </div>
 
 <script>
+// === Player ===
 const music = document.getElementById('bg-music');
 const playBtn = document.getElementById('play-btn');
 const nextBtn = document.getElementById('next-btn');
 const prevBtn = document.getElementById('prev-btn');
 const trackName = document.getElementById('track-name');
 const progress = document.getElementById('progress');
-
-let isPlaying = false;
-let currentTrack = 0;
-
+let isPlaying = false, currentTrack = 0;
 const playlist = [
-    { name: "Manu é bom, é bom", src: "music/musica1.mp3" },
-    { name: "Música 2 - Vibes", src: "music/musica2.mp3" },
-    { name: "Vibe boa que me lembra vc", src: "music/musica3.mp3" }
+    { name:"Manu é bom, é bom", src:"music/musica1.mp3" },
+    { name:"Música 2 - Vibes", src:"music/musica2.mp3" },
+    { name:"Vibe boa que me lembra vc", src:"music/musica3.mp3" }
 ];
-
-function loadTrack(index){
-    music.src = playlist[index].src;
-    trackName.textContent = playlist[index].name;
-}
+function loadTrack(index){ music.src=playlist[index].src; trackName.textContent=playlist[index].name; }
 loadTrack(currentTrack);
-
-function togglePlay(){
-    if(isPlaying){ music.pause(); playBtn.textContent='▶'; }
-    else { music.play(); playBtn.textContent='⏸'; }
-    isPlaying = !isPlaying;
-}
-
-function nextTrack(){
-    currentTrack = (currentTrack+1)%playlist.length;
-    loadTrack(currentTrack);
-    if(isPlaying) music.play();
-}
-
-function prevTrack(){
-    currentTrack = (currentTrack-1+playlist.length)%playlist.length;
-    loadTrack(currentTrack);
-    if(isPlaying) music.play();
-}
-
-music.addEventListener('timeupdate', ()=>{ progress.style.width=(music.currentTime/music.duration)*100+'%'; });
-playBtn.addEventListener('click', togglePlay);
-nextBtn.addEventListener('click', nextTrack);
-prevBtn.addEventListener('click', prevTrack);
+function togglePlay(){ if(isPlaying){music.pause();playBtn.textContent='▶';}else{music.play();playBtn.textContent='⏸';} isPlaying=!isPlaying; }
+function nextTrack(){ currentTrack=(currentTrack+1)%playlist.length; loadTrack(currentTrack); if(isPlaying) music.play(); }
+function prevTrack(){ currentTrack=(currentTrack-1+playlist.length)%playlist.length; loadTrack(currentTrack); if(isPlaying) music.play(); }
+music.addEventListener('timeupdate',()=>{progress.style.width=(music.currentTime/music.duration)*100+'%';});
+playBtn.addEventListener('click',togglePlay);
+nextBtn.addEventListener('click',nextTrack);
+prevBtn.addEventListener('click',prevTrack);
 
 // Controle de opacidade
-const videos = document.querySelectorAll('.card-video');
-const cards = document.querySelectorAll('.card');
-const opacityControl = document.getElementById('opacityControl');
-
-const highOpacityTexts = [
-    "MULHERÃO",
-    "DA",
-    "GOOOOOOOTA"
-];
-const lowOpacityTexts = [
+const videos=document.querySelectorAll('.card-video');
+const cards=document.querySelectorAll('.card');
+const opacityControl=document.getElementById('opacityControl');
+const highOpacityTexts=["MULHERÃO","DA","GOOOOOOOTA"];
+const lowOpacityTexts=[
     "É bom, é bom 🤤🤤",
     "Ok ok eu não sou lá o melhor cara com palavras mas vou fazer um esforço. Sei que a gente não se conhece há muito tempo, mas quis dedicar um pouco do meu tempo pra te entregar esse presente pois senti muita consideração por ti e gostei MT das nossas conversas. Tu me fez rir, refletir, descontrair e ficar acordado até tarde jogando papo fora. É algo que eu aprecio muito e às vezes sinto falta na minha vida, então obrigado Manu por ser essa gracinha de pessoa que você é e espero que possamos ficar mais próximos. Abraços e feliz 19 aninhos dnv! ❤️",
     "🍃 Card 3: Vídeo sutil..."
 ];
-
-function updateVideoOpacity(){
-    const opacity = parseFloat(opacityControl.value);
-    videos.forEach((v,i)=>{
-        v.style.opacity = opacity;
-        const p = cards[i].querySelector('p');
-        p.textContent = opacity>=0.3 ? highOpacityTexts[i] : lowOpacityTexts[i];
-    });
-}
+function updateVideoOpacity(){ const opacity=parseFloat(opacityControl.value); videos.forEach((v,i)=>{ v.style.opacity=opacity; const p=cards[i].querySelector('p'); p.textContent=opacity>=0.3?highOpacityTexts[i]:lowOpacityTexts[i]; });}
 updateVideoOpacity();
-opacityControl.addEventListener('input', updateVideoOpacity);
+opacityControl.addEventListener('input',updateVideoOpacity);
+
+// Folhas caindo
+const numLeaves=15;
+for(let i=0;i<numLeaves;i++){
+    const leaf=document.createElement('div');
+    leaf.classList.add('leaf');
+    leaf.style.left=Math.random()*100+'vw';
+    leaf.style.animationDuration=(5+Math.random()*5)+'s';
+    leaf.style.animationDelay=Math.random()*5+'s';
+    document.body.appendChild(leaf);
+}
 </script>
 </body>
 </html>
